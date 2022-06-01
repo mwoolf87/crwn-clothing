@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth
@@ -7,6 +7,7 @@ import {
 import "./sign-up-form.styles.scss";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+
 // create an objects that allows us to keep track of multiple fields in our form.
 
 const defaultFormFields = {
@@ -41,7 +42,6 @@ const SignUpForm = () => {
         email,
         password
       );
-
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {

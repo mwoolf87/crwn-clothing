@@ -11,6 +11,7 @@ import "./sign-in-form.styles.scss";
 import Button from "../button/button.component";
 
 import FormInput from "../form-input/form-input.component";
+
 // create an objects that allows us to keep track of multiple fields in our form.
 
 const defaultFormFields = {
@@ -31,19 +32,17 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
       resetFormFields();
     } catch (error) {
       switch (error.code) {
